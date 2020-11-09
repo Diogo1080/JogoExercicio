@@ -42,8 +42,8 @@ public class Player implements PlayerInterface {
     }
 
     public void print() {
-        System.out.println(" ----Player---- ");
-        System.out.println(" Health: " + health);
+        System.out.println("-----Player-----");
+        System.out.println("Health: " + health);
     }
 
     public boolean isAlive() {

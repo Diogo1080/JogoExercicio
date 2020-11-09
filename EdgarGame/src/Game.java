@@ -5,22 +5,19 @@ import java.util.Scanner;
 public class Game {
     private boolean status = true;
     private int stage;
-    private String[] enemyTypes = new String[]{"Elf", "Dwarf", "Human"};
-    private Enemy[] enemies = new Enemy[6];
-    private Player player = new Player();
+    private final String[] enemyTypes = new String[]{"Elf", "Dwarf", "Human"};
+    private final Enemy[] enemies = new Enemy[6];
+    private final Player player = new Player();
 
     public void start() {
         for (int i = 0; i < enemies.length - 1; i++) {
-            int randomDefence = (int) (Math.random() * 20);
-            int randomAttack = (int) (Math.random() * 10);
             int enemy = (int) Math.floor(Math.random() * Math.floor(3));
-
-            enemies[i] = new Enemy(enemyTypes[enemy], randomDefence, randomAttack);
+            enemies[i] = EnemyFactory.createEnemy(enemyTypes[enemy]);
         }
 
-        int randomDefence = (int) (Math.random() * 20) + 10;
-        int randomAttack = (int) (Math.random() * 20) + 10;
-        enemies[enemies.length - 1] = new Enemy("Dragon", randomDefence, randomAttack);
+        enemies[enemies.length - 1] = EnemyFactory.createEnemy("Dragon");
+
+        round();
     }
 
     private void normalAttack() {
@@ -54,17 +51,19 @@ public class Game {
         player.rechargeHealth(15);
     }
 
-    public void round() {
+    private void round() {
         stage = 0;
         do {
             player.print();
             enemies[stage].print();
             Scanner scan = new Scanner(System.in);
-            System.out.println(" 1: Attack enemy");
-            System.out.println(" 2: Special Attack");
-            System.out.println(" 3: Recharge");
-            System.out.println(" 4: Avoid enemy");
-            System.out.println(" 5: Quit game");
+            //Draw in screen options
+            System.out.println("1: Attack enemy");
+            System.out.println("2: Special Attack");
+            System.out.println("3: Recharge");
+            System.out.println("4: Avoid enemy");
+            System.out.println("5: Quit game");
+
             int choice = scan.nextInt();  // Read user input
             switch (choice) {
                 case 1 -> normalAttack();

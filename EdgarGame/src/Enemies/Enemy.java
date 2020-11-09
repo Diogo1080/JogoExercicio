@@ -16,7 +16,8 @@ public class Enemy {
 
     public void print() {
         System.out.println("-----Enemy-----");
-        System.out.println("Type: " + type + "\n Life:" + life);
+        System.out.println("Type: " + type + "\nLife: " + life);
+        System.out.println("---------------");
     }
 
     public boolean isAlive() {
@@ -33,7 +34,7 @@ public class Enemy {
     }
 
     public int attack() {
-        return (int) Math.floor(Math.random() *attackFactor);
+        return (int) Math.floor(Math.random() * attackFactor);
     }
 
 }
